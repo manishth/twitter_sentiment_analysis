@@ -58,4 +58,18 @@ class TwitterAnalysis(object):
 
 
 def main():
-	
+
+	twitterApi = TwitterAnalysis()
+	get_tweets = twitterApi.fetch_tweets(query="Global Warming", count=200)
+
+	positive_tweets = [tweet for tweet in get_tweets if tweet['sentiment'] == 'positive']
+	print("Positive tweets percentage: {} %".format(100*len(positive_tweets)/len(get_tweets)))
+
+	negative_tweets = [tweet for tweet in get_tweets if tweet['sentiment'] == 'negative']
+	print("Negative tweets percentage: {} %".format(100*len(negative_tweets)/len(get_tweets)))
+
+	print("Neutral tweets percentage: {} %".format(100*(len(get_tweets) - len(negative_tweets) - len(positive_tweets))/len(get_tweets)))
+
+
+if __name__ == "__main__":
+	main()
